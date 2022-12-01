@@ -22,9 +22,9 @@ img:hover {
 
 @keyframes marquee {
     from {
-        transform: translateX(100%);
+        transform: translateX(-10%);
     }
     to {
-        transform: translateX(-200%);
+        transform: translateX(-100%);
     }
 }
