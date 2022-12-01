@@ -1,0 +1,24 @@
+img:hover {
+    cursor: pointer;
+}
+
+img {
+    width: 80px;
+    height: 121px;
+}
+
+mat-card {
+    width: 50vw;
+    transition: all .25s linear;
+    cursor: pointer;
+}
+
+mat-card:hover {
+    box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.8);
+}
+
+@media (max-width: 800px) {
+    mat-card {
+        width: 90vw
+    }
+}

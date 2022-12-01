@@ -1,0 +1,30 @@
+@import '../../../../assets/variables.scss';
+
+.tbr-section {
+    border-top: 1px solid $light-beige;
+    border-bottom: 1px solid $light-beige;
+}
+
+img {
+    width: 90px;
+    height: 139px
+}
+
+img:hover {
+    box-shadow: 10px 10px 44px -15px rgba(0,0,0,0.88);
+    transform: scale(1.4);
+    cursor: pointer;
+}
+
+.book {
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-200%);
+    }
+}

@@ -1,12 +1,13 @@
-<mat-drawer-container class="h-100" autosize>
+<mat-drawer-container class="h-100" autosize hasBackdrop>
     <mat-drawer #drawer 
                 class="p-2" 
                 mode="side">
         <img src="../assets/images/logo.png" 
              alt="logo"
-             class="d-block mx-auto w-40">
+             class="d-block mx-auto w-30">
 
         <hr/>
+        
         <mat-accordion>
             <div *ngFor="let link of sidenavLinks">
                 <div *ngIf="!link.children" class="pb-3">
@@ -36,7 +37,7 @@
             
             <app-search></app-search>
 
-            <div>
+            <div class="fab-btns">
                 <button mat-mini-fab color="primary" class="me-2">
                     <mat-icon>notifications</mat-icon>
                 </button>

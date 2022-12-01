@@ -1,0 +1,28 @@
+<div mat-dialog-content>
+    <div class="info-container">
+        <div class="row">
+            <div class="col-md-4">
+                <img [src]="data.book.cover" 
+                     [alt]="data.book.title" 
+                     class="m-2">
+                <star-rating *ngIf="data.book.shelf == Shelf.read"
+                             [starType]="'svg'" 
+                             [rating]="data.book.rating" 
+                             (starClickChange)="onRatingChange($event)"></star-rating>
+                <mat-form-field appearance="outline" class="m-2">
+                    <mat-select [(value)]="data.book.shelf" 
+                                (selectionChange)="changeShelf($event.value)">
+                        <mat-option *ngFor="let shelf of shelves" [value]="shelf.value">
+                            {{shelf.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-8">
+                <h3>{{data.book.title | titlecase}} <br> By {{data.book.author | titlecase}}</h3>
+                <p>{{data.book.description}}</p>
+            </div>
+        </div>
+    </div>
+</div>

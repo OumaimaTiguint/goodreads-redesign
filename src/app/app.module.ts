@@ -1,3 +1,5 @@
+import {HttpClientModule} from '@angular/common/http';
+import {BooksService} from './shared/services/books.service';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
@@ -12,6 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {SearchModule} from './shared/components/search/search.module';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {HomeModule} from './home/home.module';
+import {StarRatingModule} from 'angular-star-rating';
 
 @NgModule({
   	declarations: [
@@ -29,9 +33,14 @@ import {MatExpansionModule} from '@angular/material/expansion';
 		FormsModule,
 		MatInputModule,
 		SearchModule,
-		MatExpansionModule
+		MatExpansionModule,
+		HttpClientModule,
+		HomeModule,
+		StarRatingModule.forRoot()
   	],
-  	providers: [],
+  	providers: [
+		BooksService
+	],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,8 @@
+<div class="tbr-section py-2">
+    <h4>Want to read</h4>
+    <div class="d-flex flex-row no-wrap overflow-hidden">
+        <div *ngFor="let book of tbr" class="p-2 book" (click)="openInfoDialog(book)">
+            <img [src]="book.cover" [alt]="book.title">
+        </div>
+    </div>
+</div>

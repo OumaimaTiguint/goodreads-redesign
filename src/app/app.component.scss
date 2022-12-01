@@ -23,3 +23,9 @@ mat-expansion-panel-header {
 ::ng-deep .mat-expansion-indicator::after {
     color: #fff !important;
 }
+
+@media (max-width: 800px) {
+    .fab-btns {
+        display: none;
+    }
+}

@@ -1,0 +1,12 @@
+@import '../../../../assets/variables.scss';
+
+img {
+    width: 80px;
+    height: 121px
+}
+
+img:hover {
+    box-shadow: 10px 10px 44px -15px rgba(0,0,0,0.88);
+    transform: scale(1.4);
+    cursor: pointer;
+}

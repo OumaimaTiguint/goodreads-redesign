@@ -1,0 +1,23 @@
+img {
+    width: 90px;
+    height: 139px
+}
+
+.desc {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 1.2;
+    max-height: 1.2*3;
+}
+
+mat-card {
+    transition: all .25s linear;
+    cursor: pointer;
+}
+
+mat-card:hover {
+    box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.8);
+}

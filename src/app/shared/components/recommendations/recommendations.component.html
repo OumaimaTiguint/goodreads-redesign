@@ -1,0 +1,15 @@
+<div class="p-2 align-middle">
+    <h4>Recommendations</h4>
+    <p>based on your reading</p>
+    <mat-card (click)="openInfoDialog(random)">
+        <div class="d-flex flex-row mx-auto">
+            <img [src]="random.cover" 
+                 [alt]="random.title">
+            <div class="px-2">
+                <strong>{{random.title}}</strong>
+                <p>by {{random.author}}</p>
+            </div>
+        </div>
+        <p class="desc pt-2">{{random.description}}</p>
+    </mat-card>
+</div>

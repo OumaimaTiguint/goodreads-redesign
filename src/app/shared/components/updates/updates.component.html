@@ -1,0 +1,21 @@
+<div>
+    <h4 class="text-center">Updates</h4>
+    <div class="d-flex flex-column w-80 cards">
+        <mat-card *ngFor="let update of updates"
+                  (click)="openInfoDialog(update)"
+                  class="mx-auto mt-3 d-flex flex-row justify-content-between">
+            <div class="d-flex flex-column">
+                <strong>{{update.name}}</strong>
+                <span>{{getUpdate(update.update)}}</span>
+                <span>{{update.title}} </span>
+                <span>by {{update.author}}</span>
+                <star-rating *ngIf="update.rating"
+                         [starType]="'svg'" 
+                         [rating]="update.rating" 
+                         [disabled]="true"></star-rating>
+            </div>
+            
+            <img [src]="update.cover" [alt]="update.title">
+        </mat-card>
+    </div>
+</div>
