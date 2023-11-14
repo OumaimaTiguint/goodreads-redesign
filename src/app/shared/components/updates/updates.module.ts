@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {UpdatesComponent} from './updates.component';
 import {StarRatingModule} from 'angular-star-rating';
-import {MatLegacyCardModule as MatCardModule} from '@angular/material/legacy-card';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
 	declarations: [

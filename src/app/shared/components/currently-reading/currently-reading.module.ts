@@ -1,7 +1,7 @@
 import {CurrentlyReadingComponent} from './currently-reading.component';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
 	declarations: [
