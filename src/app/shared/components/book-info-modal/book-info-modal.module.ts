@@ -2,8 +2,8 @@ import {BooksService} from './../../services/books.service';
 import {BookInfoModalComponent} from './book-info-modal.component';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
+import {MatLegacyDialogModule as MatDialogModule} from '@angular/material/legacy-dialog';
+import {MatLegacySelectModule as MatSelectModule} from '@angular/material/legacy-select';
 import {StarRatingModule} from 'angular-star-rating';
 
 @NgModule({

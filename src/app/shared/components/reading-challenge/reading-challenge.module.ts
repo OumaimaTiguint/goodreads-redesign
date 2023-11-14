@@ -1,4 +1,4 @@
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatLegacyDialogModule as MatDialogModule} from '@angular/material/legacy-dialog';
 import {BooksService} from './../../services/books.service';
 import {ReadingChallengeComponent} from './reading-challenge.component';
 import {NgModule} from '@angular/core';

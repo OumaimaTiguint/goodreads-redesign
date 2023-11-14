@@ -1,7 +1,7 @@
 import {BooksService} from './../../services/books.service';
 import {Component, OnInit} from '@angular/core';
 import Book, {Shelf} from '../../models/book';
-import {MatDialog} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
 import {BookInfoModalComponent} from '../book-info-modal/book-info-modal.component';
 
 @Component({
