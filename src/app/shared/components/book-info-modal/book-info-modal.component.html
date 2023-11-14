@@ -5,16 +5,19 @@
                 <img [src]="data.book.cover" 
                      [alt]="data.book.title" 
                      class="m-2">
-                <star-rating *ngIf="data.book.shelf == Shelf.read"
-                             [starType]="'svg'" 
+                @if(data.book.shelf === Shelf.read) {
+                    <star-rating [starType]="'svg'" 
                              [rating]="data.book.rating" 
                              (starClickChange)="onRatingChange($event)"></star-rating>
+                }
                 <mat-form-field appearance="outline" class="m-2">
                     <mat-select [(value)]="data.book.shelf" 
                                 (selectionChange)="changeShelf($event.value)">
-                        <mat-option *ngFor="let shelf of shelves" [value]="shelf.value">
-                            {{shelf.name}}
-                        </mat-option>
+                        @for(shelf of shelves; track shelf.id) {
+                            <mat-option [value]="shelf.value">
+                                {{shelf.name}}
+                            </mat-option>
+                        }
                     </mat-select>
                 </mat-form-field>
             </div>

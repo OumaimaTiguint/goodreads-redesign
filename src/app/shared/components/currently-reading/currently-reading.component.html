@@ -1,9 +1,11 @@
 <div class="p-2">
     <h4 class="text-center">Currently Reading</h4>
     <div class="d-flex flex-row justify-content-center">
-        <div *ngFor="let book of currentlyReadingBooks" class="book-container p-2" (click)="openInfoDialog(book)">
-            <img [src]="book.cover" [alt]="book.title" class="m-1">
-        </div>
+        @for(book of currentlyReadingBooks; track book._id) {
+            <div class="book-container p-2" (click)="openInfoDialog(book)">
+                <img [src]="book.cover" [alt]="book.title" class="m-1">
+            </div>
+        }
     </div>
 </div>
 

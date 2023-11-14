@@ -1,11 +1,13 @@
 <div>
     <h4 class="text-center">You have read {{readBooks.length}} books</h4>
     <div class="d-flex flex-row justify-content-around">
-        <ng-container *ngFor="let book of readBooks; let i = index" >
-            <div *ngIf="i > readBooks.length - 4" (click)="openInfoDialog(book)">
-                <img [src]="book.cover" [alt]="book.title">
-            </div>
-        </ng-container>
+        @for(book of readBooks; track book._id) {
+            @if($index > readBooks.length - 4) {
+                <div (click)="openInfoDialog(book)">
+                    <img [src]="book.cover" [alt]="book.title">
+                </div>
+            }
+        }
     </div>
 </div>
 
