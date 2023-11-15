@@ -3,9 +3,15 @@ import {BooksService} from './../../services/books.service';
 import {Component, OnInit} from '@angular/core';
 import Book, {Shelf} from '../../models/book';
 import {MatDialog} from '@angular/material/dialog';
+import {CommonModule} from '@angular/common';
 
 @Component({
 	selector: 'app-want-to-read',
+	standalone: true,
+	imports: [
+		CommonModule,
+		BookInfoModalComponent
+	],
 	templateUrl: './want-to-read.component.html',
 	styleUrls: ['./want-to-read.component.scss']
 })

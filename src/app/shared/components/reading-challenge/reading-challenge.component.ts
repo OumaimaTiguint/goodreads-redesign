@@ -1,11 +1,17 @@
 import {BooksService} from './../../services/books.service';
 import {Component, OnInit} from '@angular/core';
 import Book, {Shelf} from '../../models/book';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {BookInfoModalComponent} from '../book-info-modal/book-info-modal.component';
+import {CommonModule} from '@angular/common';
 
 @Component({
 	selector: 'app-reading-challenge',
+	standalone: true,
+	imports: [
+		CommonModule,
+		MatDialogModule
+	],
 	templateUrl: './reading-challenge.component.html',
 	styleUrls: ['./reading-challenge.component.scss']
 })

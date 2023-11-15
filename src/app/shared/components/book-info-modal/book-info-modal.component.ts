@@ -1,10 +1,20 @@
 import {BooksService} from './../../services/books.service';
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import Book, {Shelf} from '../../models/book';
+import {CommonModule} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {StarRatingModule} from 'angular-star-rating';
 
 @Component({
 	selector: 'app-book-info-modal',
+	standalone: true,
+	imports: [
+		CommonModule,
+		MatDialogModule,
+		MatSelectModule,
+		StarRatingModule
+	],
 	templateUrl: './book-info-modal.component.html',
 	styleUrls: ['./book-info-modal.component.scss']
 })

@@ -12,10 +12,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
-import {SearchModule} from './shared/components/search/search.module';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {HomeModule} from './home/home.module';
 import {StarRatingModule} from 'angular-star-rating';
+import {HomeComponent} from './home/home.component';
+import {SearchComponent} from './shared/components/search/search.component';
 
 @NgModule({
   	declarations: [
@@ -32,10 +32,10 @@ import {StarRatingModule} from 'angular-star-rating';
 		MatFormFieldModule,
 		FormsModule,
 		MatInputModule,
-		SearchModule,
+		SearchComponent,
 		MatExpansionModule,
 		HttpClientModule,
-		HomeModule,
+		HomeComponent,
 		StarRatingModule.forRoot()
   	],
   	providers: [

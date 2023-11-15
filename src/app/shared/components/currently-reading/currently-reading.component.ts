@@ -3,9 +3,16 @@ import {Component, OnInit} from '@angular/core';
 import Book, {Shelf} from '../../models/book';
 import {BookInfoModalComponent} from '../book-info-modal/book-info-modal.component';
 import {MatDialog} from '@angular/material/dialog';
+import {CommonModule} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
 	selector: 'app-currently-reading',
+	standalone: true,
+	imports: [
+		CommonModule,
+		MatButtonModule
+	],
 	templateUrl: './currently-reading.component.html',
 	styleUrls: ['./currently-reading.component.scss']
 })

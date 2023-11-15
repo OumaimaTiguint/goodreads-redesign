@@ -2,9 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import Book from '../../models/book';
 import {BookInfoModalComponent} from '../book-info-modal/book-info-modal.component';
+import {CommonModule} from '@angular/common';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
 	selector: 'app-recommendations',
+	standalone: true,
+	imports: [
+		CommonModule,
+		MatCardModule
+	],
 	templateUrl: './recommendations.component.html',
 	styleUrls: ['./recommendations.component.scss']
 })

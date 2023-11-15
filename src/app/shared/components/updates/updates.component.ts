@@ -2,9 +2,18 @@ import {Shelf} from './../../models/book';
 import {Component, OnInit} from '@angular/core';
 import {BookInfoModalComponent} from '../book-info-modal/book-info-modal.component';
 import {MatDialog} from '@angular/material/dialog';
+import {CommonModule} from '@angular/common';
+import {MatCardModule} from '@angular/material/card';
+import {StarRatingModule} from 'angular-star-rating';
 
 @Component({
 	selector: 'app-updates',
+	standalone: true,
+	imports: [
+		CommonModule,
+		StarRatingModule,
+		MatCardModule
+	],
 	templateUrl: './updates.component.html',
 	styleUrls: ['./updates.component.scss']
 })
