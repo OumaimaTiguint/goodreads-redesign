@@ -1,9 +1,0 @@
-<mat-form-field appearance="outline" class="mt-4">
-    <input matInput type="text" [(ngModel)]="value" placeholder="Search" class="ps-2">
-    @if(value) {
-    	<button matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-        	<mat-icon>close</mat-icon>
-      	</button>
-    }
-    <mat-icon matPrefix>search</mat-icon>
-</mat-form-field>
