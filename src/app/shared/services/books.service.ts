@@ -7,19 +7,20 @@ import Book from '../models/book';
   	providedIn: 'root'
 })
 export class BooksService {
+	defaultURL = "http://localhost:5000/books/";
 
   	constructor(private http: HttpClient) {
 	}
 
 	gettAllBooks(): Observable<any> {
-        return this.http.get('http://localhost:5000/');
+        return this.http.get(this.defaultURL);
     }
 
 	addBook(book: Book): Observable<any> {
-		return this.http.post('http://localhost:5000/add', book);
+		return this.http.post(this.defaultURL + 'add/', book);
 	}
 
 	updateBook(id:any, book:Book): Observable<any> {
-		return this.http.post('http://localhost:5000/update/'+id, book);
+		return this.http.post(this.defaultURL + 'update/' + id, book);
 	}
 }

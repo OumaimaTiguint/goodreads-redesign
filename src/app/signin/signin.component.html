@@ -1,0 +1,38 @@
+<form class="container d-flex align-items-center justify-content-center vh-100" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-card class="w-50 m-auto mt-5">
+        <mat-card-header>
+            <mat-card-title>Sign in</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <!-- Username -->
+            <mat-form-field appearance="outline" class="w-100 form-field">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" required>
+                <mat-error *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)">
+                    <span *ngIf="loginForm.get('username')?.errors?.['required']">Username is required.</span>
+                </mat-error>
+            </mat-form-field>
+  
+            <!-- Password -->
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" required>
+                <mat-error *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+                    <span *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</span>
+                    <span *ngIf="loginForm.get('password')?.errors?.['invalidPassword']">Invalid password.</span>
+                </mat-error>
+            </mat-form-field>
+        </mat-card-content>
+
+        <p class="text-center mt-3">You don't have an account yet? <a (click)="goToRegister()">Sign up</a></p>
+  
+        <mat-card-actions align="end">
+            <button mat-raised-button
+                    color="primary" 
+                    type="submit" 
+                    [disabled]="loginForm.invalid">
+                Sign in
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</form>
