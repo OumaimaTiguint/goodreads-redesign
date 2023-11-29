@@ -7,6 +7,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {BooksService} from '../../services/books.service';
 import Book from '../../models/book';
+import {BookInfoModalComponent} from '../book-info-modal/book-info-modal.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
 	selector: 'app-search',
@@ -40,7 +42,7 @@ import Book from '../../models/book';
 
 		<mat-autocomplete #auto="matAutocomplete">
 			@for(item of filteredItems(); track item._id) {
-				<mat-option [value]="item._id">
+				<mat-option [value]="item._id" (onSelectionChange)="onAutocompleteSelectionChange(item)">
         			{{ item.title }}
       			</mat-option>
 			}
@@ -52,7 +54,8 @@ export class SearchComponent implements OnInit {
   	items!: Book[];
   	filteredItems = signal<Book[] | undefined>([])
 
-  	constructor(private booksService: BooksService) {}
+  	constructor(private booksService: BooksService, 
+				public dialog: MatDialog) {}
 
   	ngOnInit(): void {
 		this.booksService.gettAllBooks().subscribe(res => {
@@ -70,4 +73,21 @@ export class SearchComponent implements OnInit {
     	this.searchControl.setValue('');
     	this.filteredItems.set(this.items);
   	}
+
+	onAutocompleteSelectionChange(selectedItem: Book) {
+		if (selectedItem) {
+		  this.openInfoDialog(selectedItem);
+		  this.clearSearch();
+		}
+	}
+	  
+	openInfoDialog(book:Book) {
+		this.dialog.open(BookInfoModalComponent, {
+			data: {
+				book: book,
+			},
+			height: '98%',
+            width: '100%'
+		});
+	}
 }
