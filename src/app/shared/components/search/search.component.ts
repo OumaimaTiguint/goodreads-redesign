@@ -43,7 +43,15 @@ import {MatDialog} from '@angular/material/dialog';
 		<mat-autocomplete #auto="matAutocomplete">
 			@for(item of filteredItems(); track item._id) {
 				<mat-option [value]="item._id" (onSelectionChange)="onAutocompleteSelectionChange(item)">
-        			{{ item.title }}
+					<div class="d-flex flex-row justify-content-between w-100 my-2">
+						<img src={{item.cover}} 
+							 alt={{item.title}} 
+							 width="50" 
+							 height="80"/>
+						<div class="text-nowrap overflow-hidden text-truncate ms-1" style="max-width: 150px">
+							{{item.title}}
+						</div>
+					</div>
       			</mat-option>
 			}
     	</mat-autocomplete>
