@@ -16,7 +16,7 @@ import {StarRatingModule} from 'angular-star-rating';
 		StarRatingModule
 	],
 	templateUrl: './book-info-modal.component.html',
-	styleUrls: ['./book-info-modal.component.scss']
+	styleUrl: './book-info-modal.component.scss'
 })
 export class BookInfoModalComponent implements OnInit {
 	shelves: any[] = [

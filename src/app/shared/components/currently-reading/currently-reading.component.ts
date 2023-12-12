@@ -14,7 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 		MatButtonModule
 	],
 	templateUrl: './currently-reading.component.html',
-	styleUrls: ['./currently-reading.component.scss']
+	styleUrl: './currently-reading.component.scss'
 })
 export class CurrentlyReadingComponent implements OnInit {
 	currentlyReadingBooks: Book[] = [];

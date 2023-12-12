@@ -13,7 +13,7 @@ import {CommonModule} from '@angular/common';
 		BookInfoModalComponent
 	],
 	templateUrl: './want-to-read.component.html',
-	styleUrls: ['./want-to-read.component.scss']
+	styleUrl: './want-to-read.component.scss'
 })
 export class WantToReadComponent implements OnInit {
 	tbr: Book[] = [];

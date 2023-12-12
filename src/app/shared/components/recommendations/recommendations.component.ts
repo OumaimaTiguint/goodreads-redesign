@@ -13,7 +13,7 @@ import {MatCardModule} from '@angular/material/card';
 		MatCardModule
 	],
 	templateUrl: './recommendations.component.html',
-	styleUrls: ['./recommendations.component.scss']
+	styleUrl: './recommendations.component.scss'
 })
 export class RecommendationsComponent implements OnInit {
 	recommendations: Book[] = [

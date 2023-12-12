@@ -13,7 +13,7 @@ import {CommonModule} from '@angular/common';
 		MatDialogModule
 	],
 	templateUrl: './reading-challenge.component.html',
-	styleUrls: ['./reading-challenge.component.scss']
+	styleUrl: './reading-challenge.component.scss'
 })
 export class ReadingChallengeComponent implements OnInit {
 	readBooks: Book[] = [];

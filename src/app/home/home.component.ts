@@ -15,6 +15,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import Links from '../shared/models/links';
 import {links} from '../shared/links';
+import {ActivatedRoute} from '@angular/router';
+import User from '../shared/models/user';
+import {Observable, Subject, finalize, startWith, switchMap} from 'rxjs';
+import {UserService} from '../shared/services/user.service';
 
 @Component({
 	selector: 'app-home',
@@ -36,12 +40,43 @@ import {links} from '../shared/links';
 		MatButtonModule
 	],
 	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
 	sidenavLinks: Links[] = links;
-	constructor() { }
+	user: any;
+	userId!: string;
+	allUsers$: Observable<User[] | any> | undefined;
+	private userUpdateSubject = new Subject<void>();
 
-	ngOnInit(): void {}
+	constructor(private route: ActivatedRoute,
+				private userService: UserService) { }
+
+	getUsers(id: any) {
+		//this.loading = true;
+		this.allUsers$ = this.userUpdateSubject.pipe(
+			startWith(null),
+			switchMap(() =>
+				this.userService.getAllUsers(id).pipe(
+					finalize(() => {
+						//this.loading = false;
+					}))));
+	}
+
+	ngOnInit(): void {
+		this.userId = this.route.snapshot.queryParams['userId'];
+		this.userService.getUserById(this.userId)
+		  	.pipe(
+				finalize(() => {
+			  		//this.loading = false;
+				})
+		  	).subscribe((response: any) => {
+				this.user = response;
+				console.log(this.user)
+				this.getUsers(this.userId);
+		  	}, (error) => {
+				console.log(error);
+		  	});
+	}
 
 }

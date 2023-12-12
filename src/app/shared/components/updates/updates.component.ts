@@ -15,7 +15,7 @@ import {StarRatingModule} from 'angular-star-rating';
 		MatCardModule
 	],
 	templateUrl: './updates.component.html',
-	styleUrls: ['./updates.component.scss']
+	styleUrl: './updates.component.scss'
 })
 export class UpdatesComponent implements OnInit {
 	shelves: any[] = [
