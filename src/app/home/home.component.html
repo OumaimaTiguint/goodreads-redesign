@@ -50,9 +50,15 @@
                 <button mat-icon-button color="primary" class="me-2">
                     <mat-icon>people</mat-icon>
                 </button>
-                <button mat-icon-button color="primary" class="me-2">
+                <button mat-icon-button [matMenuTriggerFor]="menu" color="primary" class="me-2">
                     <mat-icon>person</mat-icon>
                 </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="logout()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Logout</span>
+                    </button>
+                </mat-menu>
             </div>
         </mat-toolbar>
         <div class="container">

@@ -13,12 +13,14 @@ import {MatInputModule} from '@angular/material/input';
 import {SearchComponent} from '../shared/components/search/search.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
 import Links from '../shared/models/links';
 import {links} from '../shared/links';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import User from '../shared/models/user';
 import {Observable, Subject, finalize, startWith, switchMap} from 'rxjs';
 import {UserService} from '../shared/services/user.service';
+import {AuthService} from '../shared/services/auth/auth.service';
 
 @Component({
 	selector: 'app-home',
@@ -37,7 +39,8 @@ import {UserService} from '../shared/services/user.service';
 		MatInputModule,
 		SearchComponent,
 		MatToolbarModule,
-		MatButtonModule
+		MatButtonModule,
+		MatMenuModule
 	],
 	templateUrl: './home.component.html',
 	styleUrl: './home.component.scss'
@@ -50,7 +53,9 @@ export class HomeComponent implements OnInit {
 	private userUpdateSubject = new Subject<void>();
 
 	constructor(private route: ActivatedRoute,
-				private userService: UserService) { }
+				private router: Router,
+				private userService: UserService,
+				private authService: AuthService) { }
 
 	getUsers(id: any) {
 		//this.loading = true;
@@ -61,6 +66,11 @@ export class HomeComponent implements OnInit {
 					finalize(() => {
 						//this.loading = false;
 					}))));
+	}
+
+	logout() {
+		this.authService.logout();
+		this.router.navigate(['/signin']);
 	}
 
 	ngOnInit(): void {
