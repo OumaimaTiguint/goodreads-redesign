@@ -8,9 +8,11 @@ import {BehaviorSubject, tap, catchError, throwError, Observable} from 'rxjs';
 export class AuthService {
 	private isAuthenticatedSubject: BehaviorSubject<boolean>;
 	baseUrl: string = 'http://localhost:5000/user/';
+	private authTokenKey: string = 'authToken';
 
 	constructor(private http: HttpClient) {
-		this.isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+		const storedToken = localStorage.getItem(this.authTokenKey);
+		this.isAuthenticatedSubject = new BehaviorSubject<boolean>(!!storedToken);
 	}
 
 	register(username: string, password: string) {
@@ -21,8 +23,11 @@ export class AuthService {
 		return this.http.post(this.baseUrl + 'login', {username, password})
 		.pipe(
 			tap((response: any) => {
-			  	const isAuthenticated = response.message === 'User found';
-			  	this.isAuthenticatedSubject.next(isAuthenticated);
+				if (response.token) {
+					localStorage.setItem(this.authTokenKey, response.token);
+					const isAuthenticated = response.message === 'User found';
+					this.isAuthenticatedSubject.next(isAuthenticated);
+				}
 			}),
 			catchError((error: any) => {
 			  	console.log(error);
@@ -32,6 +37,7 @@ export class AuthService {
 	}
 
 	logout(): void {
+		localStorage.removeItem(this.authTokenKey);
 		this.isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 	}
 	

@@ -1,5 +1,9 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+
+const secretKey = crypto.randomBytes(32).toString('hex');
 
 router.route('/').get((req, res) => {
     User.find()
@@ -23,7 +27,8 @@ router.post('/login', (req, res) => {
     User.findOne({ username, password })
         .then((user) => {
             if (user) {
-                res.json({ message: 'User found', user });
+                const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '2h' });
+                res.json({ message: 'User found', user, token });
             } else {
                 res.status(404).json({ message: 'User not found' });
             }
