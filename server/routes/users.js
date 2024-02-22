@@ -2,6 +2,7 @@ const router = require('express').Router();
 let User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 const secretKey = crypto.randomBytes(32).toString('hex');
 
@@ -11,29 +12,43 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err))
 });
 
-router.route('/register').post((req, res) => {
+router.route('/register').post(async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const newUser = new User({username, password});
 
-    newUser.save()
-        .then(()=> res.json('User added!'))
-        .catch((err)=> res.status(400).json('Error: ' + err))
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const newUser = new User({ username, password: hashedPassword });
+
+        await newUser.save();
+        res.json('User added!');
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body;
   
-    User.findOne({ username, password })
-        .then((user) => {
-            if (user) {
+    try {
+        const user = await User.findOne({ username });
+
+        if (user) {
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+            if (isPasswordValid) {
                 const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '2h' });
                 res.json({ message: 'User found', user, token });
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(401).json({ message: 'Invalid username or password' });
             }
-        })
-        .catch((err) => res.status(400).json('Error: ' + err));
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
 });
 
 router.get('/allUsers/:id', async (req, res) => {
