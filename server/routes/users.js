@@ -60,7 +60,7 @@ router.get('/allUsers/:id', async (req, res) => {
       
         const books = user.books || [];
       
-        const users = await Pangolin.find({ 
+        const users = await User.find({ 
             _id: { 
                 $ne: user._id,         // Exclude the current user
                 $nin: books.map(book => book._id)  // Exclude users in friends list
