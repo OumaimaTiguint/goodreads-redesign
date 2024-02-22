@@ -3,7 +3,7 @@
     <div class="d-flex flex-column w-80 cards">
         @for(update of updates; track update.id) {
             <mat-card (click)="openInfoDialog(update)"
-                      class="mx-auto mt-3 d-flex flex-row justify-content-between">
+                      class="mx-auto mt-3 d-flex flex-row justify-content-between p-3">
                 <div class="d-flex flex-column">
                     <strong>{{update.name}}</strong>
                     <span>{{getUpdate(update.update)}}</span>
