@@ -12,7 +12,7 @@ export class BooksService {
   	constructor(private http: HttpClient) {
 	}
 
-	gettAllBooks(): Observable<any> {
+	getAllBooks(): Observable<any> {
         return this.http.get(this.defaultURL);
     }
 

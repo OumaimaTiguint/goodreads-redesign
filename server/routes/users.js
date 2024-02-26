@@ -73,10 +73,59 @@ router.get('/allUsers/:id', async (req, res) => {
     }
 });
 
+router.route('/update/:id').post(async (req, res) => {
+    const userId = req.params.id;
+    const { action, bookId, bookInfo } = req.body;
+    
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json('User not found');
+        }
+
+        switch (action) {
+            case 'add':
+                try {
+                    user.books.push(bookInfo);
+                } catch(error) {
+                    console.log(error)
+                }
+                break;
+            case 'delete':
+                try {
+                    user.books = user.books.filter(book => book._id !== bookId);
+                } catch(error) {
+                    console.log(error)
+                }
+                
+                break;
+            case 'update':
+                try {
+                    const index = user.books.findIndex(book => book._id === bookId);
+                    if (index !== -1) {
+                        user.books[index] = { ...user.books[index], ...bookInfo };
+                    }
+                } catch(error) {
+                    console.log(error)
+                }
+                
+                break;
+            default:
+                return res.status(400).json('Invalid action');
+        }
+
+        await user.save();
+        res.json('User updated successfully');
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
+});
+
+
 router.route('/user/:id').get((req, res) => {
     User.findById(req.params.id)
-            .then(user => res.json(user))
-            .catch(err=> res.status(400).json('Error: ' + err))
+        .then(user => res.json(user))
+        .catch(err=> res.status(400).json('Error: ' + err))
 });
 
 

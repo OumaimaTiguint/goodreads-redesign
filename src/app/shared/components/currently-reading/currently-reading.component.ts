@@ -23,7 +23,7 @@ export class CurrentlyReadingComponent implements OnInit {
 				public dialog: MatDialog) { }
 
 	ngOnInit(): void {
-		this.booksService.gettAllBooks().subscribe(data => {
+		this.booksService.getAllBooks().subscribe(data => {
 			this.currentlyReadingBooks = data.filter((el:Book) => el.shelf == Shelf.currentlyReading);
 		});
 	}

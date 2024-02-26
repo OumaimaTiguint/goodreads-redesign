@@ -22,7 +22,7 @@ export class ReadingChallengeComponent implements OnInit {
 				public dialog: MatDialog) { }
 
 	ngOnInit(): void {
-		this.booksService.gettAllBooks().subscribe((books:Book[]) => {
+		this.booksService.getAllBooks().subscribe((books:Book[]) => {
 			this.readBooks = books.filter(book => book.shelf == Shelf.read);
 		});
 	}

@@ -5,6 +5,9 @@ import Book, {Shelf} from '../../models/book';
 import {CommonModule} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 import {StarRatingModule} from 'angular-star-rating';
+import User from '../../models/user';
+import {UserService} from '../../services/user.service';
+import {map, switchMap} from 'rxjs';
 
 @Component({
 	selector: 'app-book-info-modal',
@@ -26,20 +29,55 @@ export class BookInfoModalComponent implements OnInit {
 		{value: Shelf.read, name: 'Read'}
 	];
 	Shelf = Shelf;
+	user: User | undefined;
 
 	constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-				private booksService: BooksService) {}
+				private booksService: BooksService,
+				private userService: UserService) {}
 
 	ngOnInit(): void {
-		this.booksService.gettAllBooks().subscribe((allBooks: Book[]) => {
-			if (allBooks.find(book => book.title == this.data.book.title)) {
-				this.data.book = allBooks.find(book => book.title == this.data.book.title);
+		this.userService.getUser().pipe(
+			switchMap(user => {
+				return this.booksService.getAllBooks().pipe(
+					map(allBooks => {
+						this.user = user;
+						console.log(this.user)
+				  		const book = allBooks.find((book: Book) => book.title === this.data.book.title);
+						if (book) {
+							this.data.book = book;
+						}
+					})
+				);
+			})
+		).subscribe({
+			error: error => {
+				console.error('Error fetching data:', error);
 			}
 		});
 	}
 
 	changeShelf(shelf: Shelf) {
-		if (!!this.data.book._id) {
+		const index = this.user?.books?.findIndex(item => item._id === this.data.book._id);
+		console.log(this.user?._id)
+		if(index !== -1) {
+			this.data.book.shelf = shelf;
+			this.userService.updateUser(this.user?._id, 'update', this.data.book._id, this.data.book)
+				.subscribe(() => window.location.reload());
+		} else {
+			const newBook = {
+				shelf: shelf,
+				author: this.data.book.author,
+				cover: this.data.book.cover,
+				description: this.data.book.description,
+				title: this.data.book.title
+			};
+		  
+			this.userService.updateUser(this.user?._id, 'add', this.data.book._id, newBook)
+				.subscribe(() => window.location.reload());
+		}
+
+
+		/*if (!!this.data.book._id) {
 			this.data.book.shelf = shelf;
 			this.booksService.updateBook(this.data.book._id, this.data.book)
 				.subscribe(() => window.location.reload());
@@ -52,7 +90,7 @@ export class BookInfoModalComponent implements OnInit {
 				description: this.data.book.description,
 				title: this.data.book.title
 			}).subscribe(() => window.location.reload());
-		}
+		}*/
 		
 	}
 

@@ -4,4 +4,5 @@ export default class User {
     username!: string;
     password!: string;
     books?: Book[];
+    _id?: string
 }

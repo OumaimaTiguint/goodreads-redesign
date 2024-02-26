@@ -82,6 +82,7 @@ export class HomeComponent implements OnInit {
 				})
 		  	).subscribe((response: any) => {
 				this.user = response;
+				this.userService.setUser(response);
 				this.getUsers(this.userId);
 		  	}, (error) => {
 				console.log(error);

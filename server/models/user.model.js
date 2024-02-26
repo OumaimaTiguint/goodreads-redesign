@@ -17,10 +17,7 @@ const userSchema = new Schema({
         trim: true,
         minLength: 2
     },
-    books: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Book'
-    }]
+    books: [Book.schema]
 },
 {
     timestamps: false

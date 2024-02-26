@@ -22,7 +22,7 @@ export class WantToReadComponent implements OnInit {
 				public dialog: MatDialog) { }
 
 	ngOnInit(): void {
-		this.booksService.gettAllBooks().subscribe((el:Book[]) => {
+		this.booksService.getAllBooks().subscribe((el:Book[]) => {
 			this.tbr = el.filter((book: Book) => book.shelf == Shelf.toRead);
 		});
 	}

@@ -66,7 +66,7 @@ export class SearchComponent implements OnInit {
 				public dialog: MatDialog) {}
 
   	ngOnInit(): void {
-		this.booksService.gettAllBooks().subscribe(res => {
+		this.booksService.getAllBooks().subscribe(res => {
 			this.items = res;
 			this.filteredItems.set(this.items);
 		})
