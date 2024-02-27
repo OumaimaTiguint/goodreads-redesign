@@ -1,4 +1,4 @@
-import {BooksService} from './../../services/books.service';
+import {UserService} from './../../services/user.service';
 import {Component, OnInit} from '@angular/core';
 import Book, {Shelf} from '../../models/book';
 import {BookInfoModalComponent} from '../book-info-modal/book-info-modal.component';
@@ -19,12 +19,12 @@ import {MatButtonModule} from '@angular/material/button';
 export class CurrentlyReadingComponent implements OnInit {
 	currentlyReadingBooks: Book[] = [];
 
-	constructor(private booksService: BooksService,
+	constructor(private userService: UserService,
 				public dialog: MatDialog) { }
 
 	ngOnInit(): void {
-		this.booksService.getAllBooks().subscribe(data => {
-			this.currentlyReadingBooks = data.filter((el:Book) => el.shelf == Shelf.currentlyReading);
+		this.userService.getUser().subscribe(data => {
+			this.currentlyReadingBooks = data.books.filter((el:Book) => el.shelf == Shelf.currentlyReading);
 		});
 	}
 

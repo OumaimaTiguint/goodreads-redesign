@@ -1,9 +1,9 @@
-import {BooksService} from './../../services/books.service';
 import {Component, OnInit} from '@angular/core';
 import Book, {Shelf} from '../../models/book';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {BookInfoModalComponent} from '../book-info-modal/book-info-modal.component';
 import {CommonModule} from '@angular/common';
+import {UserService} from '../../services/user.service';
 
 @Component({
 	selector: 'app-reading-challenge',
@@ -18,12 +18,12 @@ import {CommonModule} from '@angular/common';
 export class ReadingChallengeComponent implements OnInit {
 	readBooks: Book[] = [];
 
-	constructor(private booksService: BooksService,
+	constructor(private userService: UserService,
 				public dialog: MatDialog) { }
 
 	ngOnInit(): void {
-		this.booksService.getAllBooks().subscribe((books:Book[]) => {
-			this.readBooks = books.filter(book => book.shelf == Shelf.read);
+		this.userService.getUser().subscribe((data: any) => {
+			this.readBooks = data.books.filter((book: Book) => book.shelf == Shelf.read);
 		});
 	}
 

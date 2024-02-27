@@ -58,7 +58,6 @@ export class BookInfoModalComponent implements OnInit {
 
 	changeShelf(shelf: Shelf) {
 		const index = this.user?.books?.findIndex(item => item._id === this.data.book._id);
-		console.log(this.user?._id)
 		if(index !== -1) {
 			this.data.book.shelf = shelf;
 			this.userService.updateUser(this.user?._id, 'update', this.data.book._id, this.data.book)
@@ -75,28 +74,15 @@ export class BookInfoModalComponent implements OnInit {
 			this.userService.updateUser(this.user?._id, 'add', this.data.book._id, newBook)
 				.subscribe(() => window.location.reload());
 		}
-
-
-		/*if (!!this.data.book._id) {
-			this.data.book.shelf = shelf;
-			this.booksService.updateBook(this.data.book._id, this.data.book)
-				.subscribe(() => window.location.reload());
-		} else {
-			this.data.book.shelf = shelf;
-			this.booksService.addBook({
-				shelf: shelf,
-				author: this.data.book.author,
-				cover: this.data.book.cover,
-				description: this.data.book.description,
-				title: this.data.book.title
-			}).subscribe(() => window.location.reload());
-		}*/
-		
 	}
 
 	onRatingChange(event: any) {
+		const index = this.user?.books?.findIndex(item => item._id === this.data.book._id);
 		this.data.book.rating = event.rating;
 		this.booksService.updateBook(this.data.book._id, this.data.book)
+			.subscribe(() => window.location.reload());
+
+		this.userService.updateUser(this.user?._id, 'update', this.data.book._id, this.data.book)
 			.subscribe(() => window.location.reload());
 	}
 

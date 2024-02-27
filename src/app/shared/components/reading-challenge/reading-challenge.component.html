@@ -1,5 +1,9 @@
 <div>
-    <h4 class="text-center">You have read {{readBooks.length}} books</h4>
+    <h4 class="text-center">You have read {{readBooks.length}} book
+        @if(readBooks.length !== 1) {
+            <span>s</span>
+        }
+    </h4>
     <div class="d-flex flex-row justify-content-around">
         @for(book of readBooks; track book._id) {
             @if($index > readBooks.length - 4) {
