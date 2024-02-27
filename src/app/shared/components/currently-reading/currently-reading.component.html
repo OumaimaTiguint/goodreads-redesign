@@ -1,7 +1,7 @@
 <div class="p-2">
     <h4 class="text-center">Currently Reading</h4>
     <div class="d-flex flex-row justify-content-center">
-        @if(!currentlyReadingBooks.length) {
+        @if(!currentlyReadingBooks) {
             <p class="text-center">Currently not reading anything.</p>
         } @else {
             @for(book of currentlyReadingBooks; track book._id) {

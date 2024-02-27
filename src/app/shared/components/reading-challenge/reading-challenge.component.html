@@ -1,6 +1,9 @@
 <div>
-    <h4 class="text-center">You have read {{readBooks.length}} book
-        @if(readBooks.length !== 1) {
+    <h4 class="text-center">You have read 
+        @if(readBooks) {
+            {{readBooks.length}}
+        } book
+        @if(readBooks && readBooks.length !== 1) {
             <span>s</span>
         }
     </h4>

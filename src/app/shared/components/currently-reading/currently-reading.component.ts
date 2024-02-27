@@ -24,7 +24,7 @@ export class CurrentlyReadingComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.userService.getUser().subscribe(data => {
-			this.currentlyReadingBooks = data.books.filter((el:Book) => el.shelf == Shelf.currentlyReading);
+			this.currentlyReadingBooks = data?.books.filter((el:Book) => el.shelf == Shelf.currentlyReading);
 		});
 	}
 

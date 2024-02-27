@@ -23,7 +23,7 @@ export class WantToReadComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.userService.getUser().subscribe((data:any) => {
-			this.tbr = data.books.filter((book: Book) => book.shelf == Shelf.toRead);
+			this.tbr = data?.books.filter((book: Book) => book.shelf == Shelf.toRead);
 		});
 	}
 
