@@ -76,7 +76,8 @@ router.get('/allUsers/:id', async (req, res) => {
 router.route('/update/:id').post(async (req, res) => {
     const userId = req.params.id;
     const { action, bookId, bookInfo } = req.body;
-    
+    bookInfo._id = bookId;
+
     try {
         const user = await User.findById(userId);
         if (!user) {
@@ -101,7 +102,7 @@ router.route('/update/:id').post(async (req, res) => {
                 break;
             case 'update':
                 try {
-                    const index = user.books.findIndex(book => book._id === bookId);
+                    const index = user.books.findIndex(book => book._id == bookId);
                     if (index !== -1) {
                         user.books[index] = { ...user.books[index], ...bookInfo };
                     }
